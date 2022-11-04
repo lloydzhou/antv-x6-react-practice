@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { Button } from 'antd'
-import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 // import { Graph, useGraphInstance } from 'react-x6-graph'
@@ -12,7 +11,7 @@ const GraphBehavior = () => {
   const graph = useGraphInstance()
 
   useEffect(() => {
-    if (graph.current) {
+    if (graph) {
       const data = {
         // 节点
         nodes: [
@@ -44,12 +43,12 @@ const GraphBehavior = () => {
 
       // 使用Promise模拟异步获取数据
       Promise.resolve(data).then(data => {
-        graph.current.fromJSON(data)
+        graph.fromJSON(data)
       })
-      return () => graph.current && graph.current.clearCells()
+      return () => graph && graph.clearCells()
     }
-    // console.log('graph instance', graph)
-  }, [graph.current])
+    console.log('graph instance', graph)
+  }, [graph])
 
   return null
 }
@@ -59,10 +58,11 @@ const GraphAddButton = () => {
   const graph = useGraphInstance()
   const [count, setCount] = useState(0)
   const addNode = useCallback(() => {
-    if (graph.current) {
+    console.log('addNode', graph)
+    if (graph) {
       console.log('addNode', count)
       setCount(count + 1)
-      graph.current.addNode({
+      graph.addNode({
         width: 80,
         height: 40,
         x: 100,
@@ -70,7 +70,7 @@ const GraphAddButton = () => {
         label: `label ${count + 1}`
       })
     }
-  }, [count, graph.current])
+  }, [count, graph])
 
   return <Button type="primary" onClick={addNode}>添加节点: {count}</Button>
 }

@@ -20,6 +20,7 @@ const GraphContext = createContext()
 // 导出一个Graph组件，支持父组件传递ref拿到graph对象
 export const Graph = forwardRef((props, ref) => {
 
+  const [graph, setGraph] = useState(null)
   const realRef = ref || createRef()
 
   const { container, children, ...other } = props
@@ -28,20 +29,22 @@ export const Graph = forwardRef((props, ref) => {
   const containerRef = createRef(container)
 
   useEffect(() => {
-    if (!realRef.current) {
+    if (containerRef.current && !realRef.current) {
       const graph = new X6.Graph({
         container: containerRef.current,
         ...other,
       })
-      realRef.current = graph
+      setGraph(realRef.current = graph)
     }
-  })
+  }, [containerRef.current])
 
   return (
-    <GraphContext.Provider value={realRef}>
+    <>
       {containerRef.current ? null : <div ref={containerRef} />}
-      {children}
-    </GraphContext.Provider>
+      <GraphContext.Provider value={graph}>
+        {!!graph && children}
+      </GraphContext.Provider>
+    </>
   )
 })
 
@@ -64,7 +67,7 @@ const GraphAddButton = () => {
   const [count, setCount] = useState(0)
   const addNode = useCallback(() => {
     // TODO 点击的时候添加节点并计数
-  }, [count, graph.current])
+  }, [count, graph])
   return <Button type="primary">添加节点: {count}</Button>
 }
 
