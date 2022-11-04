@@ -36,3 +36,7 @@ export const Graph = forwardRef((props, ref) => {
 // 导出一个帮助函数以便Graph组件的子组件获取x6 graph对象
 export const useGraphInstance = () => useContext(GraphContext)
 ```
+
+## TODO
+- [ ] 使用react自定义组件
+
