@@ -98,7 +98,8 @@ export const ContextMenu = forwardRef((props, ref) => {
   const positionStyle = {
     position: "absolute",
     left: x + "px",
-    top: y + "px"
+    top: y + "px",
+    display: visible ? 'block' : 'none',
   };
   const id = item ? item.id : "";
   return (
@@ -111,7 +112,7 @@ export const ContextMenu = forwardRef((props, ref) => {
         // key={id}
         onClick={(e) => handleClose()}
       >
-        {visible && children}
+        {children}
       </div>
     </ContextMenuContext.Provider>
   );

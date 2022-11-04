@@ -11,6 +11,7 @@ import FromJSONBehavior from "./FromJSONBehavior";
 function App() {
   const gRef = useRef()
   const mRef = useRef()
+  const mRef1 = useRef()
   useEffect(() => {
     console.log('ref', gRef)
   }, [gRef.current])
@@ -22,6 +23,17 @@ function App() {
       </Graph>
       <Graph grid width={800} height={600} ref={gRef}>
         <AddNodeBehavior />
+        <ContextMenu ref={mRef1} bindType="node">
+          <Menu style={{ background: "#fff" }} onClick={e => {
+            if (e.key == 1 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('remove item', item)
+                gRef.current.removeCell(item)
+              }
+            }
+          }} items={[{ key: 1, label: '移除' }, {key: 2, label: '菜单2'}]} />
+        </ContextMenu>
         <ContextMenu bindType="blank" ref={mRef}>
           <Menu style={{ background: "#fff" }} onClick={e => {
             console.log('e', e, mRef.current.context)
