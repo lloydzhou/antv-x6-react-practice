@@ -1,6 +1,7 @@
 # x6 react 最佳实践
-<a href="https://www.npmjs.com/package/@antv/x6"><img alt="NPM Package" src="https://img.shields.io/npm/v/react-x6-graph.svg?style=flat-square"></a>
-<a href="https://www.npmjs.com/package/@antv/x6"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/react-x6-graph?logo=npm&style=flat-square"></a>
+<a href="https://www.npmjs.com/package/react-x6-graph"><img alt="NPM Package" src="https://img.shields.io/npm/v/react-x6-graph.svg?style=flat-square"></a>
+<a href="https://www.npmjs.com/package/react-x6-graph"><img alt="NPM Size" src="https://img.shields.io/bundlephobia/minzip/react-x6-graph"></a>
+<a href="https://www.npmjs.com/package/react-x6-graph"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/react-x6-graph?logo=npm&style=flat-square"></a>
 <a href="/LICENSE"><img src="https://img.shields.io/github/license/lloydzhou/antv-x6-react-practice?style=flat-square" alt="MIT License"></a>
 
 提供一个react下使用X6的最佳范本：
