@@ -1,4 +1,8 @@
 # x6 react 最佳实践
+<a href="https://www.npmjs.com/package/@antv/x6"><img alt="NPM Package" src="https://img.shields.io/npm/v/react-x6-graph.svg?style=flat-square"></a>
+<a href="https://www.npmjs.com/package/@antv/x6"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/react-x6-graph?logo=npm&style=flat-square"></a>
+<a href="/LICENSE"><img src="https://img.shields.io/github/license/lloydzhou/antv-x6-react-practice?style=flat-square" alt="MIT License"></a>
+
 提供一个react下使用X6的最佳范本：
 1. 简单易用，易于做逻辑拆分
 2. 支持多实例
