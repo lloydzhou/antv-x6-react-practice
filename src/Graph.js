@@ -6,7 +6,7 @@ const GraphContext = createContext()
 export const Graph = forwardRef((props, ref) => {
   const [graph, setGraph] = useState(null)
   const realRef = ref || createRef()
-  const { container, children, ...other } = props
+  const { container, children, className='react-x6-graph', ...other } = props
   const containerRef = createRef(container)
 
   useEffect(() => {
@@ -20,10 +20,16 @@ export const Graph = forwardRef((props, ref) => {
   }, [])
 
   return (
-    <GraphContext.Provider value={graph}>
-      {containerRef.current ? null : <div ref={containerRef} />}
-      {!!graph && children}
-    </GraphContext.Provider>
+    <div className={className} style={{
+      width: '100%',
+      height: '100%',
+      position: 'relative',
+    }}>
+      <GraphContext.Provider value={graph}>
+        {containerRef.current ? null : <div ref={containerRef} />}
+        {!!graph && children}
+      </GraphContext.Provider>
+    </div>
   )
 })
 
