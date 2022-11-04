@@ -49,19 +49,27 @@ const GraphBehavior = () => {
 }
 
 function App() {
+  const gRef = useRef()
+  useEffect(() => {
+    // TODO 这里使用父组件的ref方便将gRef传递到与Graph以外的组件使用
+    console.log('ref', gRef)
+  }, [gRef.current])
   return (
     <div className="App">
       <Graph grid resizing snapline keyboard clipboard width={800} height={600}>
         <GraphBehavior />
+        <GraphAddButton />
+      </Graph>
+      {/* 1. Graph组件支持多实例；2. 父组件传递ref */}
+      <Graph grid width={800} height={600} ref={gRef}>
+        <GraphAddButton />
       </Graph>
     </div>
   );
 }
-
-
 ```
 
 
 ## TODO
-- [ ] 使用react自定义组件
+- [ ] 使用react自定义组件（默认使用Portal）
 

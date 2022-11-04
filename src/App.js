@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { Button } from 'antd'
 import logo from './logo.svg';
 import './App.css';
@@ -75,10 +75,17 @@ const GraphAddButton = () => {
 }
 
 function App() {
+  const gRef = useRef()
+  useEffect(() => {
+    console.log('ref', gRef)
+  }, [gRef.current])
   return (
     <div className="App">
       <Graph grid resizing snapline keyboard clipboard width={800} height={600}>
         <GraphBehavior />
+        <GraphAddButton />
+      </Graph>
+      <Graph grid width={800} height={600} ref={gRef}>
         <GraphAddButton />
       </Graph>
     </div>
