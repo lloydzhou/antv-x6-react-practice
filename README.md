@@ -48,6 +48,15 @@ const GraphBehavior = () => {
   return null
 }
 
+const GraphAddButton = () => {
+  const graph = useGraphInstance()
+  const [count, setCount] = useState(0)
+  const addNode = useCallback(() => {
+    // TODO 点击的时候添加节点并计数
+  }, [count, graph.current])
+  return <Button type="primary">添加节点: {count}</Button>
+}
+
 function App() {
   const gRef = useRef()
   useEffect(() => {
