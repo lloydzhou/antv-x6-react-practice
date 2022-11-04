@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createRef, useRef, useContext, forwardRef } from "react";
-import { useGraphInstance } from './Graph'
+import { useGraphInstance } from './lib/Graph'
 
 const defaultStyle = {
   width: "120px",

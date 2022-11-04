@@ -39,7 +39,7 @@
   },
   "dependencies": {},
   "scripts": {
-    "lib": "babel src/Graph.js --out-dir lib",
+    "lib": "babel src/lib/Graph.js --out-dir lib",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

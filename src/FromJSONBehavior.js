@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { useGraphInstance } from './Graph'
+import { useGraphInstance } from './lib/Graph'
 
 // 以 Behavior的模式组织代码逻辑
 // 当前这个behavior加载数据初始化节点和边，这个组件卸载的时候清空画布

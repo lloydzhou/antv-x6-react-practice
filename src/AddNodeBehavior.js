@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Button } from "antd";
-import { useGraphInstance } from './Graph'
+import { useGraphInstance } from './lib/Graph'
 
 export const AddNodeBehavior = () => {
   const graph = useGraphInstance()
