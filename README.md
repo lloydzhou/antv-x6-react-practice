@@ -1,5 +1,6 @@
 # x6 react 最佳实践
 
+1. 定义画布组件
 ```
 // 使用GraphContext存储实际的x6 graph对象
 
@@ -36,6 +37,30 @@ export const Graph = forwardRef((props, ref) => {
 // 导出一个帮助函数以便Graph组件的子组件获取x6 graph对象
 export const useGraphInstance = () => useContext(GraphContext)
 ```
+
+2. 使用
+```
+import { Graph, useGraphInstance } from './Graph'
+
+const GraphBehavior = () => {
+  const graph = useGraphInstance()
+  // TODO 这里拿到graph对象处理自己的逻辑（例如使用后端数据初始化画布，增加事件监听...）
+  return null
+}
+
+function App() {
+  return (
+    <div className="App">
+      <Graph grid resizing snapline keyboard clipboard width={800} height={600}>
+        <GraphBehavior />
+      </Graph>
+    </div>
+  );
+}
+
+
+```
+
 
 ## TODO
 - [ ] 使用react自定义组件

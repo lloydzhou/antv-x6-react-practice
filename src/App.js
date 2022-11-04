@@ -77,7 +77,7 @@ const GraphAddButton = () => {
 function App() {
   return (
     <div className="App">
-      <Graph key="graph1" grid resizing snapline keyboard clipboard width={800} height={600}>
+      <Graph grid resizing snapline keyboard clipboard width={800} height={600}>
         <GraphBehavior />
         <GraphAddButton />
       </Graph>
