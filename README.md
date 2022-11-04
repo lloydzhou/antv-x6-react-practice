@@ -42,7 +42,7 @@ export const Graph = forwardRef((props, ref) => {
       })
       setGraph(realRef.current = graph)
     }
-  }, [containerRef.current])
+  }, [])
 
   return (
     <GraphContext.Provider value={graph}>
