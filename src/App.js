@@ -3,6 +3,7 @@ import { Button } from 'antd'
 import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
+// import { Graph, useGraphInstance } from 'react-x6-graph'
 import { Graph, useGraphInstance } from './Graph'
 
 // 以 Behavior的模式组织代码逻辑

@@ -1,5 +1,11 @@
 # x6 react 最佳实践
+## 安装
+```
+npm install --save-dev react-x6-graph
+yarn add -D react-x6-graph
+```
 
+## 说明
 1. 定义画布组件
 ```
 // 使用GraphContext存储实际的x6 graph对象
@@ -40,7 +46,7 @@ export const useGraphInstance = () => useContext(GraphContext)
 
 2. 使用
 ```
-import { Graph, useGraphInstance } from './Graph'
+import { Graph, useGraphInstance } from 'react-x6-graph'
 
 const GraphBehavior = () => {
   const graph = useGraphInstance()
