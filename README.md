@@ -1,11 +1,16 @@
 # x6 react 最佳实践
+提供一个react下使用X6的最佳范本：
+1. 简单易用，易于做逻辑拆分
+2. 支持多实例
+3. 支持使用ref绑定x6 graph
+
 ## 安装
 ```
 npm install --save-dev react-x6-graph
 yarn add -D react-x6-graph
 ```
 
-## 说明
+## 设计
 1. 定义画布组件
 ```
 // 使用GraphContext存储实际的x6 graph对象
