@@ -39,12 +39,10 @@ export const Graph = forwardRef((props, ref) => {
   }, [containerRef.current])
 
   return (
-    <>
+    <GraphContext.Provider value={graph}>
       {containerRef.current ? null : <div ref={containerRef} />}
-      <GraphContext.Provider value={graph}>
-        {!!graph && children}
-      </GraphContext.Provider>
-    </>
+      {!!graph && children}
+    </GraphContext.Provider>
   )
 })
 
