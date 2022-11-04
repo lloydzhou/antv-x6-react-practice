@@ -4,11 +4,13 @@ import './App.css';
 import 'antd/dist/antd.css';
 import { Graph, useGraphInstance } from './Graph'
 import AddNodeBehavior from "./AddNodeBehavior";
-import ContextMenu from "./ContextMenu";
+import ContextMenu, { useContextMenuContext } from "./ContextMenu";
 import FromJSONBehavior from "./FromJSONBehavior";
+
 
 function App() {
   const gRef = useRef()
+  const mRef = useRef()
   useEffect(() => {
     console.log('ref', gRef)
   }, [gRef.current])
@@ -20,12 +22,21 @@ function App() {
       </Graph>
       <Graph grid width={800} height={600} ref={gRef}>
         <AddNodeBehavior />
-        <ContextMenu bindType="blank">
-          <Menu style={{ background: "#fff" }}>
-            <Menu.Item key="1">菜单1</Menu.Item>
-            <Menu.Item key="2">菜单2</Menu.Item>
-            <Menu.Item key="3">菜单3</Menu.Item>
-          </Menu>
+        <ContextMenu bindType="blank" ref={mRef}>
+          <Menu style={{ background: "#fff" }} onClick={e => {
+            console.log('e', e, mRef.current.context)
+            if (e.key == 1 && gRef.current && mRef.current) {
+              const { x, y } = mRef.current.context
+              gRef.current.addNode({
+                x: x - 40,
+                y: y - 20,
+                width: 80,
+                height: 40,
+                label: 'label'
+              })
+            }
+            mRef.current.onClose()
+          }} items={[{ key: 1, label: '添加节点' }, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
       </Graph>
     </div>
