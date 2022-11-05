@@ -26,7 +26,7 @@ export const Graph = forwardRef((props, ref) => {
       position: 'relative',
     }}>
       <GraphContext.Provider value={graph}>
-        {containerRef.current ? null : <div ref={containerRef} />}
+        {!container && <div ref={containerRef} />}
         {!!graph && children}
       </GraphContext.Provider>
     </div>
