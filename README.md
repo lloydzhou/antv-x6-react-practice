@@ -12,8 +12,8 @@
 
 ## 安装
 ```
-npm install --save-dev react-x6-graph
-yarn add -D react-x6-graph
+npm install react-x6-graph
+yarn add react-x6-graph
 ```
 
 ## 设计
