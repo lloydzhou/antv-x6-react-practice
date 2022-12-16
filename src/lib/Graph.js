@@ -1,23 +1,27 @@
 import * as X6 from '@antv/x6';
-import React, { createRef, createContext, useContext, forwardRef, useEffect, useState } from 'react';
+import React, { useRef, createContext, useContext, forwardRef, useEffect, useState } from 'react';
 
 const GraphContext = createContext()
 
 export const Graph = forwardRef((props, ref) => {
   const [graph, setGraph] = useState(null)
-  const realRef = ref || createRef()
   const { container, children, className='react-x6-graph', ...other } = props
-  const containerRef = createRef(container)
+  const containerRef = useRef(container)
 
   useEffect(() => {
-    if (containerRef.current && !realRef.current) {
+    if (containerRef.current && !graph) {
       const graph = new X6.Graph({
         container: containerRef.current,
         ...other,
       })
-      setGraph(realRef.current = graph)
+      setGraph(graph)
+      if (typeof ref === "function") {
+        ref(graph)
+      } else if (ref) {
+        ref.current = graph
+      }
     }
-  }, [])
+  }, [graph, other, ref])
 
   return (
     <div className={className} style={{
