@@ -45,7 +45,7 @@ const patch = (graph, {create=[], update=[], remove=[]}, type='node') => {
     
     if (update.length) {
       // TODO updateCell???
-      // graph.resetCells(update)
+      graph.resetCells(update)
     }
     remove.forEach(item => graph.removeCell(item))
   }
