@@ -59,11 +59,7 @@ export const useGraphState = (initState={}) => {
   const diffNodes = useMemo(() => diffCells(graph.current, nodes, 'node'), [nodes])
   const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [edges])
 
-  const setGraph = useCallback((g) => {
-    if (g) {
-      graph.current = g
-    }
-  }, [])
+  const setGraph = useCallback((g) => g && (graph.current = g), [])
 
   useEffect(() => setGraph(initState.g), [initState.g, setGraph])
 
