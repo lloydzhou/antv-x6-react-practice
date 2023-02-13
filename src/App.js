@@ -3,6 +3,7 @@ import { Button, Menu } from 'antd'
 import './App.css';
 import 'antd/dist/antd.css';
 import { Graph, useGraphInstance } from './lib/Graph'
+import { useGraphState } from './lib/hooks'
 import AddNodeBehavior from "./AddNodeBehavior";
 import ContextMenu, { useContextMenuContext } from "./ContextMenu";
 import FromJSONBehavior from "./FromJSONBehavior";
@@ -12,8 +13,35 @@ function App() {
   const gRef = useRef()
   const mRef = useRef()
   const mRef1 = useRef()
+  const { nodes, setNodes, edges, setEdges, setGraph } = useGraphState()
   useEffect(() => {
     console.log('ref', gRef)
+    if (!gRef.current) return;
+    setGraph(gRef.current)
+    setNodes([
+      {
+        id: 'node1', // String，可选，节点的唯一标识
+        x: 40,       // Number，必选，节点位置的 x 值
+        y: 40,       // Number，必选，节点位置的 y 值
+        width: 80,   // Number，可选，节点大小的 width 值
+        height: 40,  // Number，可选，节点大小的 height 值
+        label: 'hello', // String，节点标签
+      },
+      {
+        id: 'node2', // String，节点的唯一标识
+        x: 160,      // Number，必选，节点位置的 x 值
+        y: 180,      // Number，必选，节点位置的 y 值
+        width: 80,   // Number，可选，节点大小的 width 值
+        height: 40,  // Number，可选，节点大小的 height 值
+        label: 'world', // String，节点标签
+      },
+    ])
+    setEdges([
+      {
+        source: 'node1', // String，必须，起始节点 id
+        target: 'node2', // String，必须，目标节点 id
+      },
+    ])
   }, [gRef.current])
   return (
     <div className="App">
@@ -36,7 +64,7 @@ function App() {
         </ContextMenu>
         <ContextMenu bindType="blank" ref={mRef}>
           <Menu style={{ background: "#fff" }} onClick={e => {
-            console.log('e', e, mRef.current.context)
+            console.log('e', e, mRef.current.context, nodes)
             if (e.key == 1 && gRef.current && mRef.current) {
               const { x, y } = mRef.current.context
               gRef.current.addNode({
@@ -47,8 +75,18 @@ function App() {
                 label: 'label'
               })
             }
+            if (e.key == 3 && gRef.current && mRef.current) {
+              const { x, y } = mRef.current.context
+              setNodes([...nodes, {
+                x: x - 40,
+                y: y - 20,
+                width: 80,
+                height: 40,
+                label: 'label'
+              }])
+            }
             mRef.current.onClose()
-          }} items={[{ key: 1, label: '添加节点' }, {key: 2, label: '菜单2'}]} />
+          }} items={[{ key: 1, label: '添加节点' }, {key: 3, label: 'setNodes'}, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
       </Graph>
     </div>
