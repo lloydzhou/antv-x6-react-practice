@@ -5,10 +5,18 @@
 <a href="/LICENSE"><img src="https://img.shields.io/github/license/lloydzhou/antv-x6-react-practice?style=flat-square" alt="MIT License"></a>
 
 提供一个react下使用X6的最佳范本：
-1. 简单易用，易于做逻辑拆分
-2. 体积小(gzip压缩后仅0.5k)
-3. 支持多实例
-4. 支持使用ref绑定x6 graph
+1. 组件  
+a. 简单易用，易于做逻辑拆分  
+b. 体积小(Graph组件gzip压缩后仅0.5k)  
+c. 支持多实例  
+d. 支持使用ref绑定x6 graph  
+e. 支持使用useGraphInstance获取x6 graph对象
+
+2. hooks  
+a. 易学易用  
+b. 方便在自己的组件中管理图数据  
+c. 自动检测图数据变化，并增量更新到x6画布  
+d. hooks内部使用batchUpdate优化性能
 
 ## 安装
 ```
