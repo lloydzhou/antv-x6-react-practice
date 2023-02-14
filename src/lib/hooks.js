@@ -33,11 +33,11 @@ const patch = (graph, data) => {
   const {create=[], update=[], remove=[]} = data
   // console.log('patch', create, update, remove)
   if (graph) {
-    graph.startBatch("patch", data)
+    graph.startBatch("update", data)
     graph.addCell(create)
     update.forEach(([cell, prop]) => cell.setProp(prop))
     remove.forEach(item => graph.removeCell(item))
-    graph.stopBatch("patch", data)
+    graph.stopBatch("update", data)
   }
 }
 
