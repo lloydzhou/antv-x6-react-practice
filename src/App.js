@@ -64,7 +64,7 @@ function App() {
         </ContextMenu>
         <ContextMenu bindType="blank" ref={mRef}>
           <Menu style={{ background: "#fff" }} onClick={e => {
-            console.log('e', e, mRef.current.context, nodes)
+            console.log('e', e, mRef.current.context, nodes, edges)
             if (e.key == 1 && gRef.current && mRef.current) {
               const { x, y } = mRef.current.context
               gRef.current.addNode({

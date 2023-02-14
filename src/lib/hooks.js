@@ -27,7 +27,7 @@ const diffCells = (graph, cells=[], type='node') => {
 }
 
 const patch = (graph, {create=[], update=[], remove=[]}, type='node') => {
-  // console.log('patch', create, update, remove)
+  console.log('patch', create, update, remove)
   if (graph) {
     graph.startBatch("patch", {type})
     graph.addCell(create)
@@ -50,7 +50,8 @@ export const useGraphState = (initState={}) => {
   const [edges, _setEdges] = useState(e)
   const graph = useRef()
   const diffNodes = useMemo(() => diffCells(graph.current, nodes, 'node'), [nodes])
-  const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [edges])
+  // 节点变化可能引起边的变化
+  const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [nodes, edges])
 
   const setGraph = useCallback((g) => g && (graph.current = g), [])
   // 设置节点之前先调用create，默认会创建id，然后后面进行判断的时候可以使用id判断是否在画布中
