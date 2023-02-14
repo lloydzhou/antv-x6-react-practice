@@ -60,7 +60,14 @@ function App() {
                 gRef.current.removeCell(item)
               }
             }
-          }} items={[{ key: 1, label: '移除' }, {key: 2, label: '菜单2'}]} />
+            if (e.key == 3 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('remove item', item)
+                setNodes(nodes.filter(i => i.id !== item.id))
+              }
+            }
+          }} items={[{ key: 1, label: '移除' }, { key: 3, label: 'setNodes 移除' }, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
         <ContextMenu bindType="blank" ref={mRef}>
           <Menu style={{ background: "#fff" }} onClick={e => {
@@ -86,7 +93,7 @@ function App() {
               }])
             }
             mRef.current.onClose()
-          }} items={[{ key: 1, label: '添加节点' }, {key: 3, label: 'setNodes'}, {key: 2, label: '菜单2'}]} />
+          }} items={[{ key: 1, label: '添加节点' }, {key: 3, label: '使用setNodes添加'}, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
       </Graph>
     </div>
