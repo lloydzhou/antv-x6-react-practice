@@ -2,8 +2,7 @@ import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { Button, Menu } from 'antd'
 import './App.css';
 import 'antd/dist/antd.css';
-import { Graph, useGraphInstance } from './lib/Graph'
-import { useGraphState } from './lib/hooks'
+import { Graph, useGraphInstance, useGraphState } from './dist/index'
 import AddNodeBehavior from "./AddNodeBehavior";
 import ContextMenu, { useContextMenuContext } from "./ContextMenu";
 import FromJSONBehavior from "./FromJSONBehavior";

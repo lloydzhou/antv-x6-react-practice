@@ -1,3 +1,6 @@
 {
-  "presets": ["@babel/preset-react"]
+  "sourceFileName": "./src/lib/index.js",
+  "minified": true,
+  "comments": false,
+  "presets": ["@babel/preset-react", "minify"]
 }

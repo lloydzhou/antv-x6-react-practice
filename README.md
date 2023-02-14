@@ -7,7 +7,7 @@
 提供一个react下使用X6的最佳范本：
 1. 组件  
 a. 简单易用，易于做逻辑拆分  
-b. 体积小(Graph组件gzip压缩后仅0.5k)  
+b. 体积小(Graph组件仅40行)  
 c. 支持多实例  
 d. 支持使用ref绑定x6 graph  
 e. 支持使用useGraphInstance获取x6 graph对象
@@ -64,7 +64,33 @@ export const Graph = forwardRef((props, ref) => {
 export const useGraphInstance = () => useContext(GraphContext)
 ```
 
-2. 使用
+2. 定义hooks
+```
+export const useGraphState = (initState={}) => {
+  const {nodes: n, edges: e} = initState
+  const [nodes, _setNodes] = useState(n)
+  const [edges, _setEdges] = useState(e)
+  const graph = useRef()
+  const diffNodes = useMemo(() => diffCells(graph.current, nodes, 'node'), [nodes])
+  // 节点变化可能引起边的变化
+  const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [nodes, edges])
+
+  const setGraph = useCallback((g) => g && (graph.current = g), [])
+  // 更新state数据之前先检查id是否存在，自动创建id，确保diffCells的时候能使用id进行判断
+  const setNodes = (n) => _setNodes(n.map(checkId))
+  const setEdges = (e) => _setEdges(e.map(checkId))
+
+  useEffect(() => setGraph(initState.g), [initState.g, setGraph])
+
+  // 使用patch函数更新数据到x6画布
+  useEffect(() => graph.current && patch(graph.current, diffNodes), [diffNodes])
+  useEffect(() => graph.current && patch(graph.current, diffEdges), [diffEdges])
+
+  return { nodes, edges, graph, setNodes, setEdges, setGraph }
+}
+```
+
+3. 使用
 ```
 import { Graph, useGraphInstance } from 'react-x6-graph'
 
@@ -85,10 +111,16 @@ const GraphAddButton = () => {
 
 function App() {
   const gRef = useRef()
+  const { nodes, setNodes, edges, setEdges, setGraph } = useGraphState()
   useEffect(() => {
     // TODO 这里使用父组件的ref方便将gRef传递到与Graph以外的组件使用
-    console.log('ref', gRef)
+    if (!gRef.current) return;
+    setGraph(gRef.current)
   }, [gRef.current])
+  const addNode = useCallback(() => {
+    // 直接通过setNodes更新数据，添加节点至画布
+    setNodes([...nodes, {x, y, width: 80, height: 40, label}])
+  }, [nodes])
   return (
     <div className="App">
       <Graph grid resizing snapline keyboard clipboard width={800} height={600}>

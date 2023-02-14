@@ -1,4 +1,4 @@
-import * as X6 from '@antv/x6';
+import {Graph as X6Graph} from '@antv/x6';
 import React, { useRef, createContext, useContext, forwardRef, useEffect, useState } from 'react';
 
 const GraphContext = createContext()
@@ -10,7 +10,7 @@ export const Graph = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (containerRef.current && !graph) {
-      const graph = new X6.Graph({
+      const graph = new X6Graph({
         container: containerRef.current,
         ...other,
       })
