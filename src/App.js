@@ -2,21 +2,18 @@ import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { Button, Menu } from 'antd'
 import './App.css';
 import 'antd/dist/antd.css';
-import { Graph, useGraphInstance, useGraphState } from './dist/index'
+import { Graph, useGraphInstance, useGraphState } from './lib/index'
 import AddNodeBehavior from "./AddNodeBehavior";
 import ContextMenu, { useContextMenuContext } from "./ContextMenu";
 import FromJSONBehavior from "./FromJSONBehavior";
 
 
 function App() {
-  const gRef = useRef()
   const mRef = useRef()
   const mRef1 = useRef()
-  const { nodes, setNodes, edges, setEdges, setGraph } = useGraphState()
+  const { nodes, setNodes, edges, setEdges, graph: gRef } = useGraphState()
   useEffect(() => {
     console.log('ref', gRef)
-    if (!gRef.current) return;
-    setGraph(gRef.current)
     setNodes([
       {
         id: 'node1', // String，可选，节点的唯一标识

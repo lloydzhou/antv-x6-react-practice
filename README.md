@@ -110,13 +110,7 @@ const GraphAddButton = () => {
 }
 
 function App() {
-  const gRef = useRef()
-  const { nodes, setNodes, edges, setEdges, setGraph } = useGraphState()
-  useEffect(() => {
-    // TODO 这里使用父组件的ref方便将gRef传递到与Graph以外的组件使用
-    if (!gRef.current) return;
-    setGraph(gRef.current)
-  }, [gRef.current])
+  const { nodes, setNodes, edges, setEdges, graph: gRef } = useGraphState()
   const addNode = useCallback(() => {
     // 直接通过setNodes更新数据，添加节点至画布
     setNodes([...nodes, {x, y, width: 80, height: 40, label}])
