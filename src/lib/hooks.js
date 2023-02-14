@@ -14,7 +14,7 @@ const diffCells = (graph, cells=[], type='node') => {
       const prop = t.getProp()
       t.dispose()
       if (!ObjectExt.isEqual(cell.getProp(), prop)) {
-        update.push([cell, t.getProp()])
+        update.push([cell, prop])
       }
     } else {
       create.push(type === 'node' ? Node.create(c) : Edge.create(c))
