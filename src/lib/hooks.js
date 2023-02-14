@@ -5,22 +5,22 @@ const diffCells = (graph, cells=[], type='node') => {
   const create = []
   const update = []
   const remove = []
-  const Ctor = 'node' === type ? Node.create : Edge.create
-  cells.forEach(c => {
-    const cell = graph.getCellById(c.id)
-    if (cell) {
-      // 这里尝试重新调用一下create，然后通过setProp，直接将新创建的放进去
-      const t = Ctor(c)
-      const prop = t.getProp()
-      t.dispose()
-      if (!ObjectExt.isEqual(cell.getProp(), prop)) {
-        update.push([cell, prop])
-      }
-    } else {
-      create.push(type === 'node' ? Node.create(c) : Edge.create(c))
-    }
-  })
   if (graph) {
+    const Ctor = 'node' === type ? Node.create : Edge.create
+    cells.forEach(c => {
+      const cell = graph.getCellById(c.id)
+      if (cell) {
+        // 这里尝试重新调用一下create，然后通过setProp，直接将新创建的放进去
+        const t = Ctor(c)
+        const prop = t.getProp()
+        t.dispose()
+        if (!ObjectExt.isEqual(cell.getProp(), prop)) {
+          update.push([cell, prop])
+        }
+      } else {
+        create.push(type === 'node' ? Node.create(c) : Edge.create(c))
+      }
+    })
     const cellIds = new Set(cells.map(c => c.id));
     const items = type === 'node' ? graph.getNodes() : graph.getEdges()
     items.forEach(cell => {

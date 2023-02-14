@@ -1,6 +1,6 @@
 {
   "name": "react-x6-graph",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "files": [
     "dist"
   ],
@@ -42,8 +42,8 @@
   "dependencies": {},
   "scripts": {
     "lib": "babel src/lib src/lib --out-dir dist",
-    "start": "babel src/lib -w --out-dir src/dist & react-scripts start",
-    "build": "babel src/lib --out-dur src/dist && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
