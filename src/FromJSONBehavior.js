@@ -1,10 +1,10 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { useGraphInstance } from './lib/Graph'
+import React, { useCallback, useState, useEffect } from 'react';
+import { useGraphInstance } from './lib/Graph';
 
 // 以 Behavior的模式组织代码逻辑
 // 当前这个behavior加载数据初始化节点和边，这个组件卸载的时候清空画布
 const GraphBehavior = () => {
-  const graph = useGraphInstance()
+  const graph = useGraphInstance();
 
   useEffect(() => {
     if (graph) {
@@ -38,17 +38,16 @@ const GraphBehavior = () => {
       };
 
       // 使用Promise模拟异步获取数据
-      Promise.resolve(data).then(data => {
-        graph.fromJSON(data)
-      })
-      return () => graph && graph.clearCells()
+      Promise.resolve(data).then((data) => {
+        graph.fromJSON(data);
+      });
+      return () => graph && graph.clearCells();
     }
-    console.log('graph instance', graph)
-  }, [graph])
+    console.log('graph instance', graph);
+  }, [graph]);
 
-  return null
-}
+  return null;
+};
 
 export default GraphBehavior;
-
 

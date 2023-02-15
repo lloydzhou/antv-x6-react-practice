@@ -1,2 +1,2 @@
-export * from './Graph'
-export * from './hooks'
+export * from './Graph';
+export * from './hooks';
