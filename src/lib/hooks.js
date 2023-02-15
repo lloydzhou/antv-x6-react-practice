@@ -70,8 +70,8 @@ export const useGraphState = (initState={}) => {
   useEffect(() => setGraph(initState.g), [initState.g, setGraph])
 
   // 使用patch函数更新数据到x6画布
-  useEffect(() => graph.current && patch(graph.current, diffNodes), [diffNodes])
-  useEffect(() => graph.current && patch(graph.current, diffEdges), [diffEdges])
+  useEffect(() => patch(graph.current, diffNodes), [diffNodes])
+  useEffect(() => patch(graph.current, diffEdges), [diffEdges])
 
   return { nodes, edges, graph, setNodes, setEdges, setGraph }
 }
