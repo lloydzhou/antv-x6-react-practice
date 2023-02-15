@@ -1,5 +1,9 @@
-import { Node, Edge, StringExt, ObjectExt } from '@antv/x6';
-import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
+import {
+  Node, Edge, StringExt, ObjectExt,
+} from '@antv/x6';
+import {
+  useRef, useEffect, useState, useCallback, useMemo,
+} from 'react';
 
 const diffCells = (graph, cells = [], type = 'node') => {
   const create = [];
@@ -21,7 +25,7 @@ const diffCells = (graph, cells = [], type = 'node') => {
         create.push(Ctor(c));
       }
     });
-    const cellIds = new Set(cells.map(c => c.id));
+    const cellIds = new Set(cells.map((c) => c.id));
     const items = type === 'node' ? graph.getNodes() : graph.getEdges();
     items.forEach((cell) => {
       if (!cellIds.has(cell.id)) {
@@ -40,15 +44,15 @@ const patch = (graph, data) => {
       graph.addCell(create);
       update.forEach(([cell, prop]) => {
         // 直接一次性更新全部的prop可能导致部分属性更新不成功 cell.setProp(prop)
-        Object.keys(prop).forEach(key => cell.setProp(key, prop[key]));
+        Object.keys(prop).forEach((key) => cell.setProp(key, prop[key]));
       });
-      remove.forEach(item => graph.removeCell(item));
+      remove.forEach((item) => graph.removeCell(item));
     }, data);
   }
 };
 
 // 如果没有id就添加一个
-const checkId = metadata => ({ ...metadata, id: metadata.id || StringExt.uuid() });
+const checkId = (metadata) => ({ ...metadata, id: metadata.id || StringExt.uuid() });
 
 export const useGraphState = (initState = {}) => {
   const { nodes: n, edges: e } = initState;
@@ -61,8 +65,8 @@ export const useGraphState = (initState = {}) => {
 
   const setGraph = useCallback((g) => { if (g) { graph.current = g; } }, []);
   // 更新state数据之前先检查id是否存在，自动创建id，确保diffCells的时候能使用id进行判断
-  const setNodes = _nodes => _setNodes(_nodes.map(checkId));
-  const setEdges = _edges => _setEdges(_edges.map(checkId));
+  const setNodes = (_nodes) => _setNodes(_nodes.map(checkId));
+  const setEdges = (_edges) => _setEdges(_edges.map(checkId));
 
   useEffect(() => setGraph(initState.g), [initState.g, setGraph]);
 
@@ -70,7 +74,8 @@ export const useGraphState = (initState = {}) => {
   useEffect(() => patch(graph.current, diffNodes), [diffNodes]);
   useEffect(() => patch(graph.current, diffEdges), [diffEdges]);
 
-  return { nodes, edges, graph, setNodes, setEdges, setGraph };
+  return {
+    nodes, edges, graph, setNodes, setEdges, setGraph,
+  };
 };
 export default useGraphState;
-
