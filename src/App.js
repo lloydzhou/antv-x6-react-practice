@@ -49,6 +49,42 @@ function App() {
       </Graph>
       <Graph grid width={800} height={600} ref={gRef}>
         <AddNodeBehavior />
+        <ContextMenu ref={mRef1} bindType="edge">
+          <Menu style={{ background: "#fff" }} onClick={e => {
+            if (e.key == 1 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('add label', item)
+                const index = edges.findIndex(i => i.id == item.id)
+                if (index > -1) {
+                  const labels = edges[index]['labels']
+                  const length = labels.length + 1
+                  edges[index]['labels'] = Array(length).fill(0).map((_, i) => ({
+                    attrs: { label: { text: `edge label ${i}` } },
+                    position: { distance: i/length + 0.1 },
+                  }))
+                  setEdges(edges)
+                }
+              }
+            }
+            if (e.key == 2 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('remove label', item)
+                const index = edges.findIndex(i => i.id == item.id)
+                if (index > -1) {
+                  const labels = edges[index]['labels']
+                  const length = labels.length - 1 > -1 ? labels.length - 1 : 0
+                  edges[index]['labels'] = Array(length).fill(0).map((_, i) => ({
+                    attrs: { label: { text: `edge label ${i}` } },
+                    position: { distance: i/length + 0.1 },
+                  }))
+                  setEdges(edges)
+                }
+              }
+            }
+          }} items={[{ key: 1, label: 'add label' }, { key: 2, label: 'remove label' }]} />
+        </ContextMenu>
         <ContextMenu ref={mRef1} bindType="node">
           <Menu style={{ background: "#fff" }} onClick={e => {
             if (e.key == 1 && gRef.current && mRef1.current) {
@@ -65,7 +101,32 @@ function App() {
                 setNodes(nodes.filter(i => i.id !== item.id))
               }
             }
-          }} items={[{ key: 1, label: '移除' }, { key: 3, label: 'setNodes 移除' }, {key: 2, label: '菜单2'}]} />
+            if (e.key == 4 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('add port', item)
+                const index = nodes.findIndex(i => i.id == item.id)
+                if (index > -1) {
+                  const ports = nodes[index]['ports']
+                  nodes[index]['ports'] = [...ports, {id: `port${ports.length + 1}`}]
+                  setNodes(nodes)
+                }
+              }
+            }
+            if (e.key == 5 && gRef.current && mRef1.current) {
+              const { item } = mRef1.current.context
+              if (item) {
+                console.log('remove port', item)
+                const index = nodes.findIndex(i => i.id == item.id)
+                if (index > -1) {
+                  const ports = nodes[index]['ports']
+                  nodes[index]['ports'] = [...ports.slice(0, ports.length - 1)]
+                  console.log('remove port', nodes[index].ports)
+                  setNodes(nodes)
+                }
+              }
+            }
+          }} items={[{ key: 1, label: '移除' }, { key: 3, label: 'setNodes 移除' }, { key: 4, label: '增加port' }, { key: 5, label: '移除port' }, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
         <ContextMenu bindType="blank" ref={mRef}>
           <Menu style={{ background: "#fff" }} onClick={e => {

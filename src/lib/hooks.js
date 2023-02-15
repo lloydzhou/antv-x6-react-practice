@@ -38,7 +38,10 @@ const patch = (graph, data) => {
   if (graph) {
     graph.batchUpdate("update", () => {
       graph.addCell(create)
-      update.forEach(([cell, prop]) => cell.setProp(prop))
+      update.forEach(([cell, prop]) => {
+        // 直接一次性更新全部的prop可能导致部分属性更新不成功 cell.setProp(prop)
+        Object.keys(prop).forEach(key => cell.setProp(key, prop[key]))
+      })
       remove.forEach(item => graph.removeCell(item))
     }, data)
   }
