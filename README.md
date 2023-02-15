@@ -24,6 +24,10 @@ npm install react-x6-graph
 yarn add react-x6-graph
 ```
 
+## 在线demo
+
+[react-x6-graph-demo](https://codesandbox.io/s/antv-x6-react-graph-demo-6ere13?file=/src/App.js)
+
 ## 设计
 1. 定义画布组件
 ```
