@@ -6,6 +6,7 @@ import { Graph, useGraphInstance, useGraphState } from './lib/index'
 import AddNodeBehavior from "./AddNodeBehavior";
 import ContextMenu, { useContextMenuContext } from "./ContextMenu";
 import FromJSONBehavior from "./FromJSONBehavior";
+import EventBehavior from "./EventBehavior";
 
 
 function App() {
@@ -13,7 +14,6 @@ function App() {
   const mRef1 = useRef()
   const { nodes, setNodes, edges, setEdges, graph: gRef } = useGraphState()
   useEffect(() => {
-    console.log('ref', gRef)
     setNodes([
       {
         id: 'node1', // String，可选，节点的唯一标识
@@ -40,7 +40,7 @@ function App() {
         target: 'node2', // String，必须，目标节点 id
       },
     ])
-  }, [gRef.current])
+  }, [])
   return (
     <div className="App">
       <Graph grid resizing snapline keyboard clipboard width={800} height={600}>
@@ -93,6 +93,7 @@ function App() {
             mRef.current.onClose()
           }} items={[{ key: 1, label: '添加节点' }, {key: 3, label: '使用setNodes添加'}, {key: 2, label: '菜单2'}]} />
         </ContextMenu>
+        <EventBehavior />
       </Graph>
     </div>
   );
