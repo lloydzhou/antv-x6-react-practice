@@ -18,7 +18,7 @@ const diffCells = (graph, cells = [], type = 'node') => {
           update.push([cell, prop]);
         }
       } else {
-        create.push(type === 'node' ? Node.create(c) : Edge.create(c));
+        create.push(Ctor(c));
       }
     });
     const cellIds = new Set(cells.map(c => c.id));
@@ -47,11 +47,8 @@ const patch = (graph, data) => {
   }
 };
 
-const checkId = (metadata) => {
-  // 如果没有id就添加一个
-  metadata.id = metadata.id || StringExt.uuid();
-  return metadata;
-};
+// 如果没有id就添加一个
+const checkId = metadata => ({ ...metadata, id: metadata.id || StringExt.uuid() });
 
 export const useGraphState = (initState = {}) => {
   const { nodes: n, edges: e } = initState;
@@ -62,10 +59,10 @@ export const useGraphState = (initState = {}) => {
   // 节点变化可能引起边的变化
   const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [nodes, edges]);
 
-  const setGraph = useCallback(g => g && (graph.current = g), []);
+  const setGraph = useCallback((g) => { if (g) { graph.current = g; } }, []);
   // 更新state数据之前先检查id是否存在，自动创建id，确保diffCells的时候能使用id进行判断
-  const setNodes = n => _setNodes(n.map(checkId));
-  const setEdges = e => _setEdges(e.map(checkId));
+  const setNodes = _nodes => _setNodes(_nodes.map(checkId));
+  const setEdges = _edges => _setEdges(_edges.map(checkId));
 
   useEffect(() => setGraph(initState.g), [initState.g, setGraph]);
 
@@ -75,4 +72,5 @@ export const useGraphState = (initState = {}) => {
 
   return { nodes, edges, graph, setNodes, setEdges, setGraph };
 };
+export default useGraphState;
 

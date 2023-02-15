@@ -59,7 +59,7 @@ function App() {
                   console.log('add label', item);
                   const index = edges.findIndex(i => i.id == item.id);
                   if (index > -1) {
-                    const labels = edges[index].labels;
+                    const labels = edges[index].labels || [];
                     const length = labels.length + 1;
                     edges[index].labels = Array(length).fill(0).map((_, i) => ({
                       attrs: { label: { text: `edge label ${i}` } },

@@ -1,6 +1,6 @@
 {
   "name": "react-x6-graph",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "files": [
     "dist"
   ],
@@ -47,6 +47,7 @@
   "dependencies": {},
   "scripts": {
     "lib": "babel src/lib src/lib --out-dir dist",
+    "lint": "eslint --fix src/lib",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -68,15 +69,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "eslint --fix .",
-      "git add"
     ]
   }
 }
