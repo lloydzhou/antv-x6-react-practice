@@ -61,6 +61,7 @@ export const useGraphState = (initState = {}) => {
   const graph = useRef();
   const diffNodes = useMemo(() => diffCells(graph.current, nodes, 'node'), [nodes]);
   // 节点变化可能引起边的变化
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const diffEdges = useMemo(() => diffCells(graph.current, edges, 'edge'), [nodes, edges]);
 
   const setGraph = useCallback((g) => { if (g) { graph.current = g; } }, []);
