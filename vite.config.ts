@@ -11,11 +11,15 @@ export default defineConfig({
   })],
   build: {
     lib: {
-      entry: './src/lib',
-      name: 'react-x6-graph',
-      fileName: 'index',
+      entry: './src/lib/*.ts',
+      fileName: "[name]",
+      formats: ["cjs", "es"]
     },
     rollupOptions: {
+      input: {
+        index: "./src/lib/index.ts",
+        hooks: "./src/lib/hooks.ts",
+      },
       external: ['react', 'react-dom', '@antv/x6'],
       output: {
         globals: {
