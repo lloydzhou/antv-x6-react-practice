@@ -54,5 +54,5 @@ export const patch = (graph: Graph | null, data: ReturnType<typeof diffCells>) =
 };
 
 // 如果没有id就添加一个
-export const checkId = (metadata: Metadata) => ({ ...metadata, id: metadata.id || StringExt.uuid() });
+export const checkId = (metadata: Metadata) => ({ ...metadata, id: metadata.id || StringExt.uuid() }) as Metadata;
 
