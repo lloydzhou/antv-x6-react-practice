@@ -26,4 +26,3 @@ export const useGraphState = (initState: GraphState = {}) => {
     nodes, edges, graph, setNodes, setEdges, setGraph,
   };
 };
-export default useGraphState;
