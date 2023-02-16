@@ -19,6 +19,7 @@ export default defineConfig({
       input: {
         index: "./src/lib/index.ts",
         hooks: "./src/lib/hooks.ts",
+        utils: "./src/lib/utils.ts",
       },
       external: ['react', 'react-dom', '@antv/x6'],
       output: {
