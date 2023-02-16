@@ -1,6 +1,6 @@
 {
   "name": "react-x6-graph",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "type": "module",
   "files": [
     "dist/index.mjs",
@@ -16,7 +16,8 @@
     "hooks",
     "typescript"
   ],
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/lib/index.d.ts",
   "peerDependencies": {
     "@antv/x6": "^1.34.5",
