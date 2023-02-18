@@ -2,12 +2,12 @@ import { Graph, Node, Edge } from '@antv/x6';
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { diffCells, patch, checkId } from './utils'
 
-type GraphState = {nodes?: Node.Metadata[], edges?: Edge.Metadata[], g?: Graph}
+type GraphState = {nodes?: Node.Metadata[], edges?: Edge.Metadata[], graph?: Graph}
 export const useGraphState = (initState: GraphState = {}) => {
-  const { nodes: n = [], edges: e = [], g } = initState;
+  const { nodes: n = [], edges: e = [], graph: g = null } = initState;
   const [nodes, _setNodes] = useState<Node.Metadata[]>(n);
   const [edges, _setEdges] = useState<Edge.Metadata[]>(e);
-  const graph = useRef<Graph | null>(g || null);
+  const graph = useRef<Graph | null>(g);
   const diffNodes = useMemo(() => diffCells(graph.current, nodes, 'node'), [nodes]);
   // 节点变化可能引起边的变化
   // eslint-disable-next-line react-hooks/exhaustive-deps
