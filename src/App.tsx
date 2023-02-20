@@ -116,7 +116,7 @@ function App() {
                   if (index > -1) {
                     const ports = nodes[index].ports;
                     nodes[index].ports = [...ports, { id: `port${ports.length + 1}` }];
-                    setNodes(nodes);
+                    setNodes(nodes).then(() => {console.log('add port success')});
                   }
                 }
               }
@@ -129,7 +129,7 @@ function App() {
                     const ports = nodes[index].ports;
                     nodes[index].ports = [...ports.slice(0, ports.length - 1)];
                     console.log('remove port', nodes[index].ports);
-                    setNodes(nodes);
+                    setNodes(nodes).then(() => {console.log('remove port success')});
                   }
                 }
               }
