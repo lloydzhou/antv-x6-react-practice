@@ -15,6 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: "./src/lib/index.ts",
+        graph: "./src/lib/Graph.tsx",
         hooks: "./src/lib/hooks.ts",
         utils: "./src/lib/utils.ts",
       },
