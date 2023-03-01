@@ -22,6 +22,10 @@ d. hooks内部使用batchUpdate优化性能
 ```
 npm install react-x6-graph
 yarn add react-x6-graph
+
+// just using hooks
+npm install x6-hooks
+import { useGraphState } from 'x6-hooks/react'
 ```
 
 ## 在线demo
